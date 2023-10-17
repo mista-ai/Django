@@ -99,6 +99,7 @@ def get_info_about_sign_zodiac(request, sign_zodiac: str):
     data = {
         'description_zodiac': description,
         'sign': sign_zodiac,
+        'zodiacs': zodiac_dict,
     }
     return render(request, template_name='horoscope/info_zodiac.html', context=data)
 
