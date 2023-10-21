@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-
+from django.db.models import F
 # Create your views here.
 from .models import Movie
 
 
 def show_all_movies(request):
-    movies = Movie.objects.all()
+    movies = Movie.objects.order_by(F('year').asc(nulls_last=True), '-rating')
     for movie in movies:
         if movie.slug == '':
             movie.save()
