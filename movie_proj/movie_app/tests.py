@@ -72,6 +72,7 @@ class MovieModelTestCase(TestCase):
         self.print_info('Finish test_movie_budget_default_value')
 
     def test_delete_record(self):
+        # Проверка удаления записи
         self.print_info('Start test_delete_record')
         len_after_expected = Movie.objects.count() - 1
         self.movie.delete()
@@ -80,6 +81,7 @@ class MovieModelTestCase(TestCase):
         self.print_info('Finish test_delete_record')
 
     def test_change_record(self):
+        # Проверка изменения записи
         self.print_info('Start test_change_record')
         self.movie.year = 1985
         self.assertEqual(self.movie.year, 1985)
