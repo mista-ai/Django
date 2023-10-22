@@ -1,5 +1,5 @@
 """
-URL configuration for movie_proj project.
+URL configuration for university project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,13 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.urls import include
-
-admin.site.site_header = 'Наша админка'
-admin.site.index_title = 'Моя супер админка'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('movie_app.urls')),
-    path("__debug__/", include("debug_toolbar.urls")),
 ]
