@@ -20,3 +20,6 @@ class MovieAdmin(admin.ModelAdmin):
         if movie.rating < 85:
             return 'Зачет'
         return 'Топчик'
+
+    def set_dollars(self, request, queryset):
+        pass
