@@ -1,5 +1,5 @@
 from django.contrib import admin, messages
-from .models import Movie, Director, Actor
+from .models import Movie, Director, Actor, DressingRoom
 from django.db.models import QuerySet
 
 
@@ -13,6 +13,14 @@ class DirectorAdmin(admin.ModelAdmin):
 @admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('first_name', 'last_name')}
+
+
+# admin.site.register(DressingRoom)
+
+
+@admin.register(DressingRoom)
+class DressingRoomAdmin(admin.ModelAdmin):
+    list_display = ['floor', 'number', 'actor']
 
 
 class RatingFilter(admin.SimpleListFilter):
