@@ -4,13 +4,14 @@ from django.db.models import QuerySet
 
 
 # Register your models here.
-admin.site.register(Director)
-
+# admin.site.register(Director)
+@admin.register(Director)
+class DirectorAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('first_name', 'last_name')}
 
 class RatingFilter(admin.SimpleListFilter):
     title = 'Фильтр по рейтингу'
     parameter_name = 'rating'
-
     def lookups(self, request, model_admin):
         return [
             ('<40', 'Низкий'),

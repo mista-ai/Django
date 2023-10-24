@@ -8,9 +8,17 @@ class Director(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
+    slug = models.SlugField(default='', null=False, db_index=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.first_name + ' ' + self.last_name)
+    #     super(Director, self).save(*args, **kwargs)
+
+    def get_url(self):
+        return reverse('director-detail', args=[self.slug])
 
 
 class Actors(models.Model):
@@ -20,6 +28,7 @@ class Actors(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
 
 # Create your models here.
 class Movie(models.Model):
@@ -41,6 +50,7 @@ class Movie(models.Model):
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=RUB)
     slug = models.SlugField(default='', null=False, db_index=True)
     director = models.ForeignKey(Director, on_delete=models.CASCADE, null=True)
+
     # def save(self, *args, **kwargs):
     #     self.slug = slugify(self.name)
     #     super(Movie, self).save(*args, **kwargs)
