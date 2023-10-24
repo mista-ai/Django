@@ -21,6 +21,7 @@ def show_one_movie(request, slug_movie: str):
         'movie': movie
     })
 
+
 def show_all_dirctors(request):
     directors = Director.objects.all()
     for director in directors:
@@ -28,5 +29,9 @@ def show_all_dirctors(request):
             director.save()
     return render(request, 'movie_app/all_directors.html', {'directors': directors})
 
+
 def show_one_director(request, slug_director):
-    pass
+    director = get_object_or_404(Director, slug=slug_director)
+    return render(request, 'movie_app/one_director.html', {
+        'director': director
+    })

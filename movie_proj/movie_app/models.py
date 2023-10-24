@@ -13,21 +13,29 @@ class Director(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
-    # def save(self, *args, **kwargs):
-    #     self.slug = slugify(self.first_name + ' ' + self.last_name)
-    #     super(Director, self).save(*args, **kwargs)
-
     def get_url(self):
         return reverse('director-detail', args=[self.slug])
 
-
-class Actors(models.Model):
+class Actor(models.Model):
+    MALE = 'M'
+    FEMALE = 'F'
+    GENDERS = [
+        (MALE, 'Мужчина'),
+        (FEMALE, 'Женщина'),
+    ]
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    email = models.EmailField()
+    gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
+    slug = models.SlugField(default='', null=False, db_index=True)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        if self.gender == self.MALE:
+            return f'Актер {self.first_name} {self.last_name}'
+        if self.gender == self.FEMALE:
+            return f'Актриса {self.first_name} {self.last_name}'
+
+    def get_url(self):
+        return reverse('director-detail', args=[self.slug])
 
 
 # Create your models here.
@@ -51,6 +59,7 @@ class Movie(models.Model):
     slug = models.SlugField(default='', null=False, db_index=True)
     director = models.ForeignKey(Director, on_delete=models.CASCADE, null=True)
 
+    actors = models.ManyToManyField(Actor)
     # def save(self, *args, **kwargs):
     #     self.slug = slugify(self.name)
     #     super(Movie, self).save(*args, **kwargs)
