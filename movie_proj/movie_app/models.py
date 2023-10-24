@@ -16,6 +16,7 @@ class Director(models.Model):
     def get_url(self):
         return reverse('director-detail', args=[self.slug])
 
+
 class Actor(models.Model):
     MALE = 'M'
     FEMALE = 'F'
@@ -35,7 +36,7 @@ class Actor(models.Model):
             return f'Актриса {self.first_name} {self.last_name}'
 
     def get_url(self):
-        return reverse('director-detail', args=[self.slug])
+        return reverse('actor-detail', args=[self.slug])
 
 
 # Create your models here.
@@ -60,6 +61,7 @@ class Movie(models.Model):
     director = models.ForeignKey(Director, on_delete=models.CASCADE, null=True)
 
     actors = models.ManyToManyField(Actor)
+
     # def save(self, *args, **kwargs):
     #     self.slug = slugify(self.name)
     #     super(Movie, self).save(*args, **kwargs)

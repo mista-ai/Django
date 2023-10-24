@@ -1,0 +1,14 @@
+{% extends 'movie_app/base.html' %}
+
+{% block title %} Информация о актёре {{ actor.first_name }} {{ actor.last_name }}{% endblock %}
+
+{% block content %}
+    {% if actor.gender == 'F' %}
+        <h2>Актриса</h2>
+    {% else %}
+        <h2>Актёр</h2>
+    {% endif %}
+    <h3> Имя - {{ actor.first_name }}</h3>
+    <h3> Фамилия - {{ actor.last_name }}</h3>
+    <h3> Пол - {{ actor.gender }}</h3>
+{% endblock %}

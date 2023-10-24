@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import F, Value
 # Create your views here.
-from .models import Movie, Director
+from .models import Movie, Director, Actor
 
 
 def show_all_movies(request):
@@ -24,9 +24,9 @@ def show_one_movie(request, slug_movie: str):
 
 def show_all_dirctors(request):
     directors = Director.objects.all()
-    for director in directors:
-        if director.slug == '':
-            director.save()
+    # for director in directors:
+    #     if director.slug == '':
+    #         director.save()
     return render(request, 'movie_app/all_directors.html', {'directors': directors})
 
 
@@ -35,3 +35,13 @@ def show_one_director(request, slug_director):
     return render(request, 'movie_app/one_director.html', {
         'director': director
     })
+
+
+def show_all_actors(request):
+    actors = Actor.objects.all()
+    return render(request, 'movie_app/all_actors.html', {'actors': actors})
+
+
+def show_one_actor(request, slug_actor):
+    actor = get_object_or_404(Actor, slug=slug_actor)
+    return render(request, 'movie_app/one_actor.html', {'actor': actor})
