@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.http import HttpRequest
-from .forms import FeebackForm
+from .forms import FeedbackForm
 
 
 # Create your views here.
