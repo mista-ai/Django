@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import F, Value
 # Create your views here.
 from .models import Movie, Director, Actor
-from django.views.generic.list import ListView
+from django.views.generic import ListView, DetailView
 
 
 class ListDirectors(ListView):
@@ -10,10 +10,22 @@ class ListDirectors(ListView):
     model = Director
     context_object_name = 'directors'
 
+
 class ListActors(ListView):
     template_name = 'movie_app/all_actors.html'
     model = Actor
     context_object_name = 'actors'
+
+
+class DetailDirector(DetailView):
+    template_name = 'movie_app/one_director.html'
+    model = Director
+
+
+class DetailActor(DetailView):
+    template_name = 'movie_app/one_actor.html'
+    model = Actor
+
 
 def show_all_movies(request):
     # movies = Movie.objects.order_by(F('year').asc(nulls_last=True), '-rating')
