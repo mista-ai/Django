@@ -2,12 +2,13 @@
 
 {% block title %} Все отзывы {% endblock %}
 {% block content %}
-    {% for feed in feedbacks %}
+    {% for feedback in feedbacks %}
             <div>
                 -------------------------------<br>
-                {{ feed.name }} {{ feed.surname }}:<br>
-                {{ feed.feedback }}<br>
-                Рейтинг: {{ feed.rating }}<br>
+                id: {{ feedback.pk }}
+                {{ feedback.name }} {{ feedback.surname }}:<br>
+                {{ feedback.feedback }}<br>
+                Рейтинг: {{ feedback.rating }}<br>
             </div>
     {% endfor %}
 {% endblock %}
