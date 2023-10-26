@@ -2,7 +2,18 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import F, Value
 # Create your views here.
 from .models import Movie, Director, Actor
+from django.views.generic.list import ListView
 
+
+class ListDirectors(ListView):
+    template_name = 'movie_app/all_directors.html'
+    model = Director
+    context_object_name = 'directors'
+
+class ListActors(ListView):
+    template_name = 'movie_app/all_actors.html'
+    model = Actor
+    context_object_name = 'actors'
 
 def show_all_movies(request):
     # movies = Movie.objects.order_by(F('year').asc(nulls_last=True), '-rating')
@@ -22,12 +33,12 @@ def show_one_movie(request, slug_movie: str):
     })
 
 
-def show_all_dirctors(request):
-    directors = Director.objects.all()
-    # for director in directors:
-    #     if director.slug == '':
-    #         director.save()
-    return render(request, 'movie_app/all_directors.html', {'directors': directors})
+# def show_all_dirctors(request):
+#     directors = Director.objects.all()
+#     # for director in directors:
+#     #     if director.slug == '':
+#     #         director.save()
+#     return render(request, 'movie_app/all_directors.html', {'directors': directors})
 
 
 def show_one_director(request, slug_director):
@@ -37,9 +48,9 @@ def show_one_director(request, slug_director):
     })
 
 
-def show_all_actors(request):
-    actors = Actor.objects.all()
-    return render(request, 'movie_app/all_actors.html', {'actors': actors})
+# def show_all_actors(request):
+#     actors = Actor.objects.all()
+#     return render(request, 'movie_app/all_actors.html', {'actors': actors})
 
 
 def show_one_actor(request, slug_actor):
